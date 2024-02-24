@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { IoCloudUploadOutline } from 'react-icons/io5';
-import { IoMdExit } from 'react-icons/io';
-import { CTRLButtonIcon } from "../../../components/icons/ctrlbuttonicon/CTRLButtonIcon";
 import { SelectFileButton } from "../../../components/buttons/selectfilebutton/SelectFileButton";
+import { CustomSelectFile } from "@renderer/presentation/components/inputs/customselectfile/CustomSelectFile";
+import { LuClipboardCopy } from "react-icons/lu";
+import { LuTimerReset } from 'react-icons/lu';
+import { Spacer } from "@renderer/presentation/components/misc/spacer/Spacer";
 
 const DefaultDashboardContainer = styled.div`
     display: flex;
@@ -12,26 +12,15 @@ const DefaultDashboardContainer = styled.div`
     flex-direction: column;
     background-color: #202020;
     width: 100%;
-    height: 100vh;
+    height: auto;
 `;
 
 const DefaultDashboardParagraph = styled.p`
     display: flex;
     align-items: center;
     gap: 5px;
+    font-size: 14px;
     color: white;
-`;
-
-const FileSectionContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    height: 100px;
-    border: 2px dashed #3a3a3a;
-    color: #bebebe;
-    border-radius: 10px;
-    gap: 10px;
 `;
 
 const Divider = styled.div`
@@ -42,7 +31,7 @@ const Divider = styled.div`
     border-radius: 1px;
 `;
 
-const DefaultDashboardButton = styled.button`
+const DefaultDashboardButton = styled.a`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -53,7 +42,6 @@ const DefaultDashboardButton = styled.button`
     height: 25px;
     background: none;
     cursor: pointer;
-    margin-top: 5px;
     transition: ease-in-out .25s;
 
     &:hover {
@@ -76,48 +64,111 @@ const ButtonRightContainer = styled.div`
     gap: 5px;
 `;
 
-const ButtonRightIconContainer = styled.div`
-    width: 20px;
-    height: 20px;
+const Paragraph = styled.p<{ color?: string }>`
+    color: ${(props) => props.color ? props.color : '#868686'};
+    font-size: 14px;
 `;
 
 export function DefaultDashboard() {
-    
-    const navigate = useNavigate();
-    
+
     function onExitButtonClick() {
         return close();
     }
 
     return (
         <DefaultDashboardContainer>
-            <FileSectionContainer>
-                <IoCloudUploadOutline size={18} color={'#ffffff'} />
-                <DefaultDashboardParagraph>
-                    Drag files here...
-                </DefaultDashboardParagraph>
-            </FileSectionContainer>
-            <br />
+            <Spacer height={'20px'} />
+            <CustomSelectFile />
             <Divider />
-            <SelectFileButton
-                
-            />
+
+            <Spacer height={'5px'} />
+
+            <SelectFileButton />
             <DefaultDashboardButton
                 onClick={onExitButtonClick}
             >
                 <ButtonLeftContainer>
-                    <IoMdExit size={15} color={'#ffffff'} />
-                    <DefaultDashboardParagraph>
-                        Exit
-                    </DefaultDashboardParagraph>
+                    <LuClipboardCopy size={15} color={'#ffffff'} />
+                    <Paragraph color={'#ffffff'}>
+                        Upload from clipboard
+                    </Paragraph>
                 </ButtonLeftContainer>
                 <ButtonRightContainer>
-                    <ButtonRightIconContainer>
-                        <CTRLButtonIcon />
-                    </ButtonRightIconContainer>
-                    <DefaultDashboardParagraph>
-                        + X
-                    </DefaultDashboardParagraph>
+                    <Paragraph>
+                        CTRL + T
+                    </Paragraph>
+                </ButtonRightContainer>
+            </DefaultDashboardButton>
+            <DefaultDashboardButton
+                onClick={onExitButtonClick}
+            >
+                <ButtonLeftContainer>
+                    <LuTimerReset size={15} color={'#ffffff'} />
+                    <Paragraph color={'#ffffff'}>
+                        Recent uploads
+                    </Paragraph>
+                </ButtonLeftContainer>
+                <ButtonRightContainer>
+                    <Paragraph>
+                        CTRL + T
+                    </Paragraph>
+                </ButtonRightContainer>
+            </DefaultDashboardButton>
+            <Spacer height={'10px'} />
+            <Divider />
+
+            <Spacer height={'5px'} />
+            <DefaultDashboardButton
+                onClick={onExitButtonClick}
+            >
+                <ButtonLeftContainer>
+                    <Paragraph color={'#ffffff'}>
+                        About Docx to Gift
+                    </Paragraph>
+                </ButtonLeftContainer>
+            </DefaultDashboardButton>
+            <Spacer height={'2px'} />
+            <DefaultDashboardButton
+                onClick={onExitButtonClick}
+            >
+                <ButtonLeftContainer>
+                    <Paragraph color={'#ffffff'}>
+                        Check for updates
+                    </Paragraph>
+                </ButtonLeftContainer>
+            </DefaultDashboardButton>
+
+            <Spacer height={'5px'} />
+            <Divider />
+
+            <Spacer height={'5px'} />
+            <DefaultDashboardButton
+                onClick={onExitButtonClick}
+            >
+                <ButtonLeftContainer>
+                    <Paragraph color={'#ffffff'}>
+                        Settings
+                    </Paragraph>
+                </ButtonLeftContainer>
+                <ButtonRightContainer>
+                    <Paragraph>
+                        CTRL + L
+                    </Paragraph>
+                </ButtonRightContainer>
+            </DefaultDashboardButton>
+            <Spacer height={'2px'} />
+            <DefaultDashboardButton
+                onClick={onExitButtonClick}
+            >
+                <ButtonLeftContainer>
+                    <Paragraph color={'#ffffff'}>
+                        Quit
+                    </Paragraph>
+                </ButtonLeftContainer>
+                <ButtonRightContainer>
+                    <Paragraph>
+                        CTRL + W
+                    </Paragraph>
                 </ButtonRightContainer>
             </DefaultDashboardButton>
         </DefaultDashboardContainer>

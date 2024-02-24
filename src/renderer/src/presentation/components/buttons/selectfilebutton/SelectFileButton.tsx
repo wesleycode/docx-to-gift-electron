@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { LuFileInput } from 'react-icons/lu';
-import { CTRLButtonIcon } from "../../icons/ctrlbuttonicon/CTRLButtonIcon";
 
-const SelectFileButtonContainer = styled.button`
+const SelectFileButtonContainer = styled.label`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -13,7 +12,6 @@ const SelectFileButtonContainer = styled.button`
     height: 25px;
     background: none;
     cursor: pointer;
-    margin-top: 5px;
     transition: ease-in-out .25s;
 
     &:hover {
@@ -30,6 +28,7 @@ const ButtonLeftContainer = styled.div`
 
 const Paragraph = styled.p`
     color: white;
+    font-size: 14px;
 `;
 
 const ButtonRightContainer = styled.div`
@@ -40,26 +39,26 @@ const ButtonRightContainer = styled.div`
     gap: 5px;
 `;
 
-const ButtonRightIconContainer = styled.div`
-    width: 20px;
-    height: 20px;
-`;
-
 export function SelectFileButton() {
+
+    function handleOnDropFile(event?: React.SyntheticEvent) {
+        event?.preventDefault();
+    }
+
     return (
-        <SelectFileButtonContainer>
+        <SelectFileButtonContainer
+            onDrop={handleOnDropFile}
+            htmlFor='fileInput'
+        >
             <ButtonLeftContainer>
                 <LuFileInput size={15} color={'#ffffff'} />
                 <Paragraph>
-                    Load file
+                    Select file
                 </Paragraph>
             </ButtonLeftContainer>
             <ButtonRightContainer>
-                <ButtonRightIconContainer>
-                    <CTRLButtonIcon />
-                </ButtonRightIconContainer>
                 <Paragraph>
-                    + T
+                    CTRL + T
                 </Paragraph>
             </ButtonRightContainer>
         </SelectFileButtonContainer>
