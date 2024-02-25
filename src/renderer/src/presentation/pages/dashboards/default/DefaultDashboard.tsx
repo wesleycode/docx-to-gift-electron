@@ -4,6 +4,10 @@ import { CustomSelectFile } from "@renderer/presentation/components/inputs/custo
 import { LuClipboardCopy } from "react-icons/lu";
 import { LuTimerReset } from 'react-icons/lu';
 import { Spacer } from "@renderer/presentation/components/misc/spacer/Spacer";
+import { useNavigate } from "react-router-dom";
+import { SelectButton } from "@renderer/presentation/components/buttons/selectbutton/Index";
+import { Divider } from "@renderer/presentation/components/misc/divider/Divider";
+import { ApplicationConstants } from "@renderer/application/common/constants/ApplicationConstants";
 
 const DefaultDashboardContainer = styled.div`
     display: flex;
@@ -15,162 +19,113 @@ const DefaultDashboardContainer = styled.div`
     height: auto;
 `;
 
-const DefaultDashboardParagraph = styled.p`
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 14px;
-    color: white;
-`;
-
-const Divider = styled.div`
-    display: flex;
-    background-color: #3a3a3a;
-    width: 300px;
-    height: 2px;
-    border-radius: 1px;
-`;
-
-const DefaultDashboardButton = styled.a`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 300px;
-    border-radius: 5px;
-    text-decoration: none;
-    border: none;
-    height: 25px;
-    background: none;
-    cursor: pointer;
-    transition: ease-in-out .25s;
-
-    &:hover {
-        background-color: #6200ff;
-    }
-`;
-
-const ButtonLeftContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-`;
-
-const ButtonRightContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 20px;
-    gap: 5px;
-`;
-
-const Paragraph = styled.p<{ color?: string }>`
-    color: ${(props) => props.color ? props.color : '#868686'};
-    font-size: 14px;
-`;
-
 export function DefaultDashboard() {
+
+    const navigate = useNavigate();
 
     function onExitButtonClick() {
         return close();
+    }
+
+    function onAboutButtonClick() {
+        return alert('Made by Wesley de Araujo');
+    }
+
+    function onRedirectToSettingsPage() {
+        navigate('/settings');
     }
 
     return (
         <DefaultDashboardContainer>
             <Spacer height={'20px'} />
             <CustomSelectFile />
-            <Divider />
 
-            <Spacer height={'5px'} />
+            <Divider />
 
             <SelectFileButton />
-            <DefaultDashboardButton
-                onClick={onExitButtonClick}
+
+            <SelectButton.Container
+                onclick={onExitButtonClick}
             >
-                <ButtonLeftContainer>
-                    <LuClipboardCopy size={15} color={'#ffffff'} />
-                    <Paragraph color={'#ffffff'}>
-                        Upload from clipboard
-                    </Paragraph>
-                </ButtonLeftContainer>
-                <ButtonRightContainer>
-                    <Paragraph>
-                        CTRL + T
-                    </Paragraph>
-                </ButtonRightContainer>
-            </DefaultDashboardButton>
-            <DefaultDashboardButton
-                onClick={onExitButtonClick}
+                <SelectButton.Icon
+                    icon={LuClipboardCopy}
+                    color='#ffffff'
+                />
+                <SelectButton.Text
+                    title='Upload from clipboard'
+                    color='#ffffff'
+                />
+                <SelectButton.RightText
+                    title='CTRL + T'
+                    color='#868686'
+                />
+            </SelectButton.Container>
+
+            <SelectButton.Container
+                onclick={onExitButtonClick}
             >
-                <ButtonLeftContainer>
-                    <LuTimerReset size={15} color={'#ffffff'} />
-                    <Paragraph color={'#ffffff'}>
-                        Recent uploads
-                    </Paragraph>
-                </ButtonLeftContainer>
-                <ButtonRightContainer>
-                    <Paragraph>
-                        CTRL + T
-                    </Paragraph>
-                </ButtonRightContainer>
-            </DefaultDashboardButton>
-            <Spacer height={'10px'} />
+                <SelectButton.Icon
+                    icon={LuTimerReset}
+                    color='#ffffff'
+                />
+                <SelectButton.Text
+                    title='Recent uploads'
+                    color='#ffffff'
+                />
+                <SelectButton.RightText
+                    title='CTRL + R'
+                    color='#868686'
+                />
+            </SelectButton.Container>
+
             <Divider />
 
-            <Spacer height={'5px'} />
-            <DefaultDashboardButton
-                onClick={onExitButtonClick}
+            <SelectButton.Container
+                onclick={onAboutButtonClick}
             >
-                <ButtonLeftContainer>
-                    <Paragraph color={'#ffffff'}>
-                        About Docx to Gift
-                    </Paragraph>
-                </ButtonLeftContainer>
-            </DefaultDashboardButton>
-            <Spacer height={'2px'} />
-            <DefaultDashboardButton
-                onClick={onExitButtonClick}
-            >
-                <ButtonLeftContainer>
-                    <Paragraph color={'#ffffff'}>
-                        Check for updates
-                    </Paragraph>
-                </ButtonLeftContainer>
-            </DefaultDashboardButton>
+                <SelectButton.Text
+                    title={'About ' + ApplicationConstants.APPLICATION_NAME}
+                    color='#ffffff'
+                />
+            </SelectButton.Container>
 
-            <Spacer height={'5px'} />
+            <SelectButton.Container
+                onclick={onExitButtonClick}
+            >
+                <SelectButton.Text
+                    title='Check for updates'
+                    color='#ffffff'
+                />
+            </SelectButton.Container>
+
             <Divider />
 
-            <Spacer height={'5px'} />
-            <DefaultDashboardButton
-                onClick={onExitButtonClick}
+            <SelectButton.Container
+                onclick={onRedirectToSettingsPage}
             >
-                <ButtonLeftContainer>
-                    <Paragraph color={'#ffffff'}>
-                        Settings
-                    </Paragraph>
-                </ButtonLeftContainer>
-                <ButtonRightContainer>
-                    <Paragraph>
-                        CTRL + L
-                    </Paragraph>
-                </ButtonRightContainer>
-            </DefaultDashboardButton>
-            <Spacer height={'2px'} />
-            <DefaultDashboardButton
-                onClick={onExitButtonClick}
+                <SelectButton.Text
+                    title='Settings'
+                    color='#ffffff'
+                />
+                <SelectButton.RightText
+                    title='CTRL + L'
+                    color='#868686'
+                />
+            </SelectButton.Container>
+
+            <SelectButton.Container
+                onclick={onExitButtonClick}
             >
-                <ButtonLeftContainer>
-                    <Paragraph color={'#ffffff'}>
-                        Quit
-                    </Paragraph>
-                </ButtonLeftContainer>
-                <ButtonRightContainer>
-                    <Paragraph>
-                        CTRL + W
-                    </Paragraph>
-                </ButtonRightContainer>
-            </DefaultDashboardButton>
+                <SelectButton.Text
+                    title='Quit'
+                    color='#ffffff'
+                />
+                <SelectButton.RightText
+                    title='CTRL + W'
+                    color='#868686'
+                />
+            </SelectButton.Container>
+
         </DefaultDashboardContainer>
     );
 }

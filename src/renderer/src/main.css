@@ -12,3 +12,9 @@ body {
 ol, ul {
     list-style: none;
 }
+
+:root {
+
+	--primary-accent-color: #6200ff;
+
+}

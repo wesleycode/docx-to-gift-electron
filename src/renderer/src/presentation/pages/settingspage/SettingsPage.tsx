@@ -11,10 +11,6 @@ const DefaultDashboardContainer = styled.div`
     height: 100vh;
 `;
 
-const DefaultDashboardParagraph = styled.p`
-    color: white;
-`;
-
 const DefaultDashboardButton = styled.button`
     width: 250px;
     height: 60px;
@@ -31,27 +27,12 @@ const DefaultDashboardButton = styled.button`
     }
 `;
 
-const FileSectionContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 500px;
-    height: 300px;
-    border: 2px dashed #3a3a3a;
-    color: #6b6b6b;
-    border-radius: 10px;
-`;
-
-export function MenuPage() {
+export function SettingsPage() {
 
     const navigate = useNavigate();
 
     return (
         <DefaultDashboardContainer>
-            <FileSectionContainer>
-                Página 2
-            </FileSectionContainer>
-            <br />
             <DefaultDashboardButton
                 onClick={() => {
                     navigate('/')
